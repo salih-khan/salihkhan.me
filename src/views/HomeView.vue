@@ -13,7 +13,7 @@
                             A Full-Stack Developer who transforms ideas into interactive digital experiences. What began as a simple curiosity about coding has blossomed into a fulfilling career where creativity meets technical precision. I thrive on crafting solutions that are not only functional but also visually captivating, finding joy in every step of the journey—from brainstorming concepts to delivering the final product.
                         </p>
                         <div style="display: flex;" class="socials_container">
-                            <a href="/Pdf/Salih_Khan_CV 2.pdf" target="_blank" rel="noopener noreferrer">
+                            <a href="/Pdf/S.KTechCV.pdf" target="_blank" rel="noopener noreferrer">
                                 <button id="my_cv">
                                     My CV
                                     <div class="hoverEffect">
