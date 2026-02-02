@@ -780,7 +780,7 @@ export default {
 }
 
 .s3 {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: 1200px;
     margin: auto;
