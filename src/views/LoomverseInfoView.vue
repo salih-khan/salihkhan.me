@@ -1,11 +1,17 @@
 <template>
 <div class="page">
-    <!-- Simple dark header (kept minimal) -->
-    <header class="topbar" role="banner">
-        <div class="topbar__inner">
-            <div class="brand">Loomverse</div>
-            <nav class="nav" aria-label="Top navigation">
-                <RouterLink class="nav__link" to="/">Home</RouterLink>
+    <header class="docHeader" role="banner">
+        <div class="docHeader__inner">
+            <div class="docHeader__title">
+                <a href="https://salihkhan.me" class="docHeader__home">
+                    salihkhan.me
+                </a>
+            </div>
+
+            <nav class="docHeader__nav" aria-label="Documentation navigation">
+                <a href="/projects/loomverse" class="docHeader__link">
+                    Loomverse Documentation
+                </a>
             </nav>
         </div>
     </header>
@@ -17,16 +23,16 @@
             <aside class="toc" aria-label="Table of contents">
                 <div class="toc__inner">
                     <div class="toc__title">Contents</div>
-
-                    <!-- Placeholder links for now (we'll replace with real sections later) -->
-                    <a class="toc__link" href="#overview">Overview</a>
-                    <a class="toc__link" href="#context">Project Context</a>
-                    <a class="toc__link" href="#architecture">System Architecture</a>
-                    <a class="toc__link" href="#data-model">Data Model</a>
-                    <a class="toc__link" href="#api">API Design</a>
-                    <a class="toc__link" href="#log">Development Log</a>
-                    <a class="toc__link" href="#status">Current Status</a>
-                    <a class="toc__link" href="#next">Next Steps</a>
+                    <nav class="toc__nav" aria-label="On this page">
+                        <a class="toc__link" href="#overview">Overview</a>
+                        <a class="toc__link" href="#context">Project Context</a>
+                        <a class="toc__link" href="#architecture">System Architecture</a>
+                        <a class="toc__link" href="#data-model">Data Model</a>
+                        <a class="toc__link" href="#api">API Design</a>
+                        <a class="toc__link" href="#log">Development Log</a>
+                        <a class="toc__link" href="#status">Current Status</a>
+                        <a class="toc__link" href="#next">Next Steps</a>
+                    </nav>
                 </div>
             </aside>
 
@@ -36,7 +42,35 @@
                 <section id="overview" class="section">
                     <h1 class="title">Loomverse</h1>
                     <p class="subtitle">Backend-driven interactive storytelling platform</p>
+                    <img src="@/assets/documentation_loomverse/files.png" alt="Loomverse system architecture diagram" style="max-width: 100%; height: auto; margin-bottom: 18px;" />
+                    <div class="metaCard" role="group" aria-label="Project metadata">
+                        <div class="metaRow">
+                            <div class="metaLabel">Stack</div>
+                            <div class="metaValue">
+                                <span class="chip">Node.js</span>
+                                <span class="chip">Express</span>
+                                <span class="chip">MongoDB</span>
+                                <span class="chip">Nuxt (Vue)</span>
+                                <span class="chip">REST</span>
+                            </div>
+                        </div>
 
+                        <div class="metaRow">
+                            <div class="metaLabel">Focus</div>
+                            <div class="metaValue">
+                                <span class="chip chip--soft">Backend architecture</span>
+                                <span class="chip chip--soft">Data modelling</span>
+                                <span class="chip chip--soft">Editor tooling</span>
+                            </div>
+                        </div>
+
+                        <div class="metaRow">
+                            <div class="metaLabel">Status</div>
+                            <div class="metaValue">
+                                <span class="chip chip--status">Active development</span>
+                            </div>
+                        </div>
+                    </div>
                     <p>
                         Loomverse is a software project focused on modelling branching narrative content as structured data.
                         Rather than embedding story logic directly into frontend views or hardcoded conditionals, Loomverse
@@ -77,6 +111,7 @@
 
                 <section id="architecture" class="section">
                     <h2>System Architecture</h2>
+                    <img src="@/assets/documentation_loomverse/dashboard.png" alt="Loomverse system architecture diagram" style="max-width: 100%; height: auto; margin-bottom: 18px;" />
 
                     <p>
                         Loomverse follows a conventional client–server architecture with clear separation of concerns.
@@ -143,6 +178,7 @@
 
                 <section id="api" class="section">
                     <h2>API Design</h2>
+                    <img src="@/assets/documentation_loomverse/cover.png" alt="Loomverse system architecture diagram" style="max-width: 100%; height: auto; margin-bottom: 18px;" />
 
                     <p>
                         The backend exposes narrative data through a set of REST endpoints that are treated as a stable
@@ -172,6 +208,7 @@
 
                 <section id="log" class="section">
                     <h2>Development Log</h2>
+                    <img src="@/assets/documentation_loomverse/editor.png" alt="Loomverse system architecture diagram" style="max-width: 100%; height: auto; margin-bottom: 18px;" />
 
                     <p>
                         Loomverse is developed iteratively. This section documents design decisions and implementation
@@ -232,10 +269,11 @@
    ========= */
 .page {
     min-height: 100vh;
-    background: #ffffff;
+    background: #fcfcfd;
     color: #111827;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  font-weight: 420; /* or 400 if Oregan supports it cleanly */
+    font-weight: 420;
+    /* or 400 if Oregan supports it cleanly */
 }
 
 /* Make anchor scrolling land nicely below the header */
@@ -251,30 +289,6 @@
 /* =========
    Header
    ========= */
-.topbar {
-    background: #0b0f19;
-    color: #ffffff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-p {
-  font-weight: 420;  /* 400–450 range */
-  line-height: 1.7;
-}
-
-.topbar__inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-
-.brand {
-    font-weight: 700;
-    letter-spacing: 0.2px;
-}
 
 .nav {
     display: flex;
@@ -314,44 +328,48 @@ p {
 /* =========
    TOC
    ========= */
+/* =========
+   TOC
+   ========= */
 .toc {
-  position: sticky;
-  top: 18px;
-  align-self: start;
+    position: sticky;
+    top: 18px;
+    align-self: start;
 }
 
-/* sticky container */
 .toc__inner {
-      position: static; /* no need for nested sticky */
-
-    top: 18px;
-    /* distance from viewport top */
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 12px;
     background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 12px;
 }
 
 .toc__title {
-    font-weight: 800;
+    font-weight: 650;
     font-size: 0.95rem;
     color: #111827;
     margin: 0 0 10px;
+    letter-spacing: 0.2px;
+}
+
+.toc__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .toc__link {
     display: block;
-    text-decoration: none;
-    color: #374151;
-    padding: 8px 10px;
+    padding: 9px 10px;
     border-radius: 10px;
-    line-height: 1.25;
+    font-weight: 480;
+    color: #374151;
+    text-decoration: none;
     border: 1px solid transparent;
 }
 
 .toc__link:hover {
-    background: #f9fafb;
-    border-color: #e5e7eb;
+    background: #f3f4f6;
     color: #111827;
 }
 
@@ -366,25 +384,31 @@ p {
 }
 
 .section {
-    padding: 18px 0 22px;
+    padding: 22px 0 26px;
     border-bottom: 1px solid #e5e7eb;
 }
 
+.section--hero {
+    padding: 18px 18px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
 .title {
-    font-size: 2.1rem;
-    line-height: 1.15;
-    margin: 0 0 10px;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-    margin: 0 0 10px;
-    color: #374151;
-    font-weight: 700;
+    margin-bottom: 12px;
+    color: #4b5563;
+    font-weight: 600;
 }
 
 h2 {
-    margin: 0 0 10px;
-    font-size: 1.15rem;
+    margin-bottom: 10px;
+    padding-top: 6px;
 }
 
 p {
@@ -415,6 +439,141 @@ p {
         display: inline-block;
         margin: 6px 6px 0 0;
         padding: 7px 10px;
+    }
+}
+
+/* metacard */
+
+.metaCard {
+    margin-top: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 12px 12px;
+}
+
+.metaRow {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 12px;
+}
+
+.metaRow+.metaRow {
+    margin-top: 6px;
+    border-top: 1px dashed #eef2f7;
+    padding-top: 12px;
+}
+
+.metaLabel {
+    font-weight: 650;
+    color: #111827;
+    letter-spacing: 0.15px;
+}
+
+.metaValue {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Chips are “docs badges”, not marketing badges */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    color: #111827;
+    font-weight: 520;
+    font-size: 0.92rem;
+    line-height: 1;
+}
+
+.chip--soft {
+    background: #ffffff;
+    color: #374151;
+    font-weight: 500;
+}
+
+.chip--status {
+    background: #111827;
+    border-color: #111827;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* header */
+/* =========================
+   Documentation header
+   ========================= */
+.docHeader {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.docHeader__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.docHeader__home {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    color: #111827;
+    text-decoration: none;
+}
+
+.docHeader__home:hover {
+    text-decoration: underline;
+}
+
+.docHeader__nav {
+    display: flex;
+    gap: 14px;
+}
+
+.docHeader__link {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #374151;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.docHeader__link:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+/* Mobile meta layout */
+@media (max-width: 786px) {
+    .metaRow {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .metaLabel {
+        color: #374151;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .toc,
+    .toc__inner {
+        top: auto !important;
+        position: static !important;
     }
 }
 </style>
