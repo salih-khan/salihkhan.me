@@ -25,10 +25,16 @@
                 <div class="info_section">
                     <h1>Hi, I'm Salih</h1>
                     <h3>Backend-Focused<br /></h3>
-                    <h3>Full-Stack Developer</h3>
+                    <h3>Web Developer</h3>
 
                     <p id="info_section_desc">
-                        A Full-Stack Developer who transforms ideas into interactive digital experiences. What began as a simple curiosity about coding has blossomed into a fulfilling career where creativity meets technical precision. I thrive on crafting solutions that are not only functional but also visually captivating, finding joy in every step of the journey—from brainstorming concepts to delivering the final product.
+                        I’m a self-taught software developer,starting since 4 years and primarily focused on backend and server-side systems.
+
+                        While I’ve built frontend projects in the past, my core interest lies in designing and implementing reliable backend architectures, APIs, and data-driven systems.
+
+                        You can see this focus clearly in Loomverse, an actively developed project where I document architectural decisions, server logic, and platform design as they evolve.
+
+                        Loomverse is an ongoing startup project and serves as a practical record of how I think, design, and build systems over time.
                     </p>
 
                     <div class="socials_container">
@@ -61,27 +67,25 @@
             <div class="s2">
                 <div class="s2__spacer"></div>
                 <h1 id="skills">Skills & Technologies</h1>
+                <div id="skills-body">
+                          <p>I work primarily with backend and server-side technologies, with a strong focus on building clear, maintainable systems rather than surface-level features. My main runtime is Node.js, where I work close to the fundamentals of request flow, asynchronous behaviour, file I/O, and API design instead of relying purely on framework abstractions. I use MongoDB as my primary database for modelling structured, evolving data, with an emphasis on explicit schemas, relationships, and long-term maintainability. On the frontend, I’m comfortable with Vue and Nuxt for building clean, functional interfaces, but these are treated as delivery layers rather than sources of application logic.
+                     Overall, my work is backend-first: data models, APIs, and system design come before UI polish.</p>
 
+                </div>
                 <div class="grid12">
                     <!-- You decide spans per card -->
-                    <div class="featureCard col-span-6 row-span-4 featureCard--media">
+                    <div class="featureCard col-span-6 row-span-3" style="display: flex;">
                         <div class="featureCard__rail">Node.js</div>
 
-                        <div class="featureCard__image featureCard__image--rotated">
-                            <img src="../assets/Images/Section 2/node.svg" alt="Node.js" />
-                        </div>
 
                         <div class="featureCard__body">
                             <p>Node.js is the runtime I use to build backend systems and APIs. I work with it beyond surface-level frameworks, focusing on request flow, asynchronous behaviour, file I/O, and API design. My work emphasises backend-first architecture. </p>
                         </div>
                     </div>
-                    <div class="featureCard col-span-6 row-span-4 featureCard--media ">
+                    <div class="featureCard col-span-6 row-span-3  " style="display: flex;">
                         <div class="featureCard__rail">MongoDB</div>
 
-                        <div class="featureCard__image featureCard__image--rotated mongo-img">
-                            <img src="../assets/Images/Section 2/mongo.png" alt="MongoDB" />
-                        </div>
-
+                
                         <div class="featureCard__body">
                             <p>MongoDB is my primary database for modelling structured, evolving data. Here I design and implement data structures and models that meets the needs of the task and future proof further usage.</p>
                         </div>
@@ -173,7 +177,7 @@
                         </p>
                         <p class="s3_stack">Adobe Photoshop</p>
 
-                        <a href="Pdf/Application form.png" target="_blank">
+                        <a href="Pdf/Application Form.png" target="_blank">
                             <span class="s3_hint">View Form →</span>
                         </a>
                     </div>
@@ -428,7 +432,17 @@ export default {
     border-radius: 12px;
     font-size: 2.5rem;
 }
-
+#skills-body{
+    max-width: 1000px; 
+    margin: auto;
+    margin-bottom: 3rem;
+    line-height: 1.5rem;
+}
+@media (max-width: 700px) {
+    #skills-body p{
+        margin: 2rem;
+    }
+}
 .s2__spacer {
     height: 100px;
 }
@@ -437,7 +451,7 @@ export default {
    Dynamic 12-column grid
    ========================= */
 .grid12 {
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 18px;
 
@@ -447,6 +461,14 @@ export default {
 
     grid-auto-flow: row dense;
     grid-auto-rows: 80px;
+}
+
+    .featureCard{
+        display: flex !important;
+        background-color: red;
+    }
+.featureCard__body{
+    margin: 1rem;
 }
 
 /* Tablet */
@@ -516,10 +538,7 @@ export default {
         grid-row: span 3;
     }
 
-    /* Feature cards should stack internally on mobile */
-    .featureCard--media {
-        grid-template-columns: 1fr;
-    }
+ 
 
     .featureCard__rail {
         writing-mode: horizontal-tb;
@@ -540,15 +559,9 @@ export default {
         display: none !important;
     }
 
-    .featureCard__image img {
-        transform: translate(-50%, -50%) rotate(-90deg) !important;
-        height: auto !important;
-        width: 100px !important;
-    }
+ 
 
-    .featureCard--media {
-        grid-template-columns: 56px auto !important;
-    }
+
 }
 
 /* Span utilities */
@@ -657,48 +670,10 @@ export default {
     padding-right: 8px;
 }
 
-.featureCard--media {
-    display: grid;
-    grid-template-columns: 56px 110px 1fr;
-    gap: 16px;
-    height: 100%;
-}
 
-/* wrapper must be relative so absolute img stays inside */
-.featureCard__image {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
-}
 
-/* rotate the image inside the wrapper */
-.featureCard__image--rotated img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
 
-    transform: translate(-20%, -50%) rotate(-90deg);
-    transform-origin: center;
 
-    /* size rules: choose ONE strategy */
-    height: 85%;
-    width: auto;
-
-    /* prevent huge surprises */
-    max-width: 200%;
-    max-height: 200%;
-
-    display: block;
-}
-
-.mongo-img img {
-    transform: translate(-50%, -50%) rotate(-90deg);
-    height: 15%;
-
-}
 
 .featureCard__body h4 {
     margin: 0 0 8px;
@@ -782,7 +757,7 @@ export default {
 .s3 {
     height: 100%;
     width: 100%;
-    max-width: 1200px;
+    max-width: 800px;
     margin: auto;
 }
 
