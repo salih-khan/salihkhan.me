@@ -18,11 +18,19 @@ const routes = [
   },
   {
     path: '/projects/loomverse',
-    name: 'resume',
+    name: 'loomverse',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: LoomverseInfoView
+  },
+  {
+    path: '/projects/crud-server',
+    name: 'crud-server',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/projects/CrudServer.vue')
   }
 ]
 

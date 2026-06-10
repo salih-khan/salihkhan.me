@@ -1,20 +1,6 @@
 <template>
 <div class="page">
-    <header class="docHeader" role="banner">
-        <div class="docHeader__inner">
-            <div class="docHeader__title">
-                <a href="https://salihkhan.me" class="docHeader__home">
-                    salihkhan.me
-                </a>
-            </div>
-
-            <nav class="docHeader__nav" aria-label="Documentation navigation">
-                <a href="/projects/loomverse" class="docHeader__link">
-                    Loomverse Documentation
-                </a>
-            </nav>
-        </div>
-    </header>
+    <Header />
 
     <!-- Docs layout -->
     <main class="shell" role="main">
@@ -403,10 +389,10 @@
 </div>
 </template>
 
-<script>
-// Layout-only page. No JS required.
-</script>
+<script setup>
+import Header from '../components/Header.vue';
 
+</script>
 <style scoped>
 /* =========
    Base
