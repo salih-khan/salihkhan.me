@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoomverseInfoView from '../views/LoomverseInfoView.vue'
-
+import CvView from '../views/CvView.vue'
 const routes = [
   {
     path: '/',
@@ -31,7 +31,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/projects/CrudServer.vue')
-  }
+  },
+  {
+  path: '/cv',
+  name: 'cv',
+  component: CvView
+}
 ]
 
 const router = createRouter({
