@@ -100,6 +100,20 @@ export default {
 .tech-stack li[data-skill="vue-router"] { background: #35495e; color: #42b883; }
 .tech-stack li[data-skill="node.js"] { background: #3c873a; color: #fff; }
 .tech-stack li[data-skill="json"] { background: #f0db4f; color: #333; }
+.tech-stack li[data-skill="typescript"] {
+  background: #3178c6;
+  color: #fff;
+}
+
+.tech-stack li[data-skill="rest api"] {
+  background: #6c757d;
+  color: #fff;
+}
+
+.tech-stack li[data-skill="graph architecture"] {
+  background: #7c3aed;
+  color: #fff;
+}
 
 .actions {
   display: flex;

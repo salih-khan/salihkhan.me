@@ -197,7 +197,27 @@
 
   <div class="projects-grid">
     <!-- LEFT COLUMN -->
+     
     <div class="projects-grid__col-left">
+
+      <FeatureCard
+  title="Loomverse"
+  status="In Development"
+  description="An interactive visual storytelling platform that enables creators to build, publish, and share branching narratives through a browser-based, no-code editor. Designed to bridge the gap between traditional web publishing and game development, Loomverse combines visual story editing, graph-based narrative architecture, cloud publishing, and creator-focused tools into a single platform."
+  :skills="[
+  'Vue.js',
+  'Nuxt',
+  'Node.js',
+  'MongoDB',
+  'Firebase',
+  'TypeScript',
+  'REST API',
+  'Graph Architecture',
+  'Html', 'Css', 'Javascript'
+]"
+  siteUrl="https://salihkhan.me/projects/loomverse"
+/>
+
       <FeatureCard
         :image="surmaLogo"
         title="Photography Portfolio"
@@ -225,15 +245,8 @@
         githubUrl="https://github.com/salih-khan"
         siteUrl="https://connect2deen.com"
       />
-      <FeatureCard
-        title="Loomverse"
-        status="In Development"
-        description="An ongoing backend-focused project centered on building and experimenting with systems from first principles, including message processing, automation, and real-world integrations; designed to be a practical record of how I think, design, and build systems over time."
-        :skills="['Vue.js', 'Nuxt', 'MongoDB']"
-        siteUrl="https://salihkhan.me/projects/loomverse"
-      />
-    </div>
 
+</div>
     <!-- RIGHT COLUMN -->
     <div class="projects-grid__col-right">
       <ProjectCard
