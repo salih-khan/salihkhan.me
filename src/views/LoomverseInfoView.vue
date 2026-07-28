@@ -16,12 +16,14 @@
 
           <div class="hero__meta">
             <span class="pill pill--status"><span class="dot"></span> In active development</span>
+            <span class="pill">Loomverse Ltd — UK registered company</span>
+            <span class="pill">£5,000 Santander X grant</span>
             <span class="pill">MVP targeted 2026</span>
             <span class="pill">Solo-built</span>
           </div>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#product">See the editor</a>
+            <a class="btn btn--primary unselect" href="#product">See the editor</a>
             <a class="btn btn--ghost" href="#vision">The vision</a>
           </div>
         </div>
@@ -49,6 +51,7 @@
               <a class="toc__link" href="#what">What it is</a>
               <a class="toc__link" href="#problem">The problem</a>
               <a class="toc__link" href="#product">The product</a>
+              <a class="toc__link" href="#demo">Live demo</a>
               <a class="toc__link" href="#architecture">How it works</a>
               <a class="toc__link" href="#vision">Vision &amp; status</a>
               <a class="toc__link" href="#log">Build log</a>
@@ -148,15 +151,17 @@
               <div class="splitfeature">
                 <h3 class="h3">Story map</h3>
                 <p>
-                  A node-graph view of the narrative, where scenes are nodes and choices are the connections
-                  between them. The shape of the story becomes something you can see and shape directly.
+                  A node-graph view where scenes are nodes and choices are the connections between them.
+                  Branches are wired by dragging from a choice to its destination, so the shape of the story
+                  is something you author directly rather than describe in a form.
                 </p>
               </div>
               <div class="splitfeature">
                 <h3 class="h3">Searchable index</h3>
                 <p>
-                  Find any scene by title, filter by endings or orphans, and read live status badges —
-                  start, ending, unreachable — derived automatically from the actual story data.
+                  Find any scene by title, filter to endings or dead ends, and read live status badges —
+                  start, ending, dead end, unreachable — so structural problems surface while you write
+                  instead of at the end.
                 </p>
               </div>
               <div class="splitfeature">
@@ -174,6 +179,45 @@
             </figure>
           </section>
 
+          <!-- Live demo -->
+          <section id="demo" class="section">
+            <span class="kicker">Try it</span>
+            <h2 class="h2">Live demo</h2>
+            <p>
+              There are two demos: one you can open today, and the one being built to represent the
+              platform properly.
+            </p>
+
+            <div class="endcta">
+              <div>
+                <div class="endcta__title">Early proof of concept — available now</div>
+                <div class="endcta__sub">A single playable branching story with audio. Reader experience only.</div>
+              </div>
+              <a class="btn btn--ghost" href="https://loomverse.github.io/loomverse-demo/" target="_blank" rel="noopener">Open demo</a>
+            </div>
+
+            <p>
+              That build is deliberately basic. It exists to prove the reading loop — choices, branch
+              resolution, media playback — and nothing beyond it. It doesn't show the editor, and it
+              predates the current architecture, so it under-represents where the platform actually is.
+            </p>
+
+            <h3 class="h3">The full demo is in active development</h3>
+            <p>
+              The demo that will properly represent Loomverse is being built now, and it covers both halves
+              of the platform: the <strong>editor</strong> — scene canvas, story map, inspectors — and a
+              <strong>complete story</strong> read end to end. The point is to show the whole pipeline, from
+              a creator wiring branches on a node graph through to a reader moving along the finished result.
+            </p>
+            <p>
+              It's being built to speak to everyone the platform is for — <strong>developers, animators,
+              writers and general readers alike</strong>. Each of those audiences judges the project on
+              something different: the structure underneath, the visual authoring surface, the writing
+              workflow, or simply whether the story is worth reading. The demo has to answer all four,
+              and that is the current priority.
+            </p>
+          </section>
+
           <!-- How it works -->
           <section id="architecture" class="section">
             <span class="kicker">Under the hood</span>
@@ -186,31 +230,52 @@
 
             <p class="muted">Narrative content flows through a clear hierarchy:</p>
 
-            <div class="flowchain" role="img" aria-label="Story to Chapters to Sections to Choices">
+            <div class="flowchain" role="img" aria-label="Story to Chapters to Sections to Elements">
               <span class="flownode">Story</span>
               <span class="flowarrow">→</span>
               <span class="flownode">Chapters</span>
               <span class="flowarrow">→</span>
               <span class="flownode">Sections</span>
               <span class="flowarrow">→</span>
-              <span class="flownode">Choices</span>
+              <span class="flownode">Elements</span>
             </div>
 
             <p>
-              Crucially, branching is modelled as a <strong>graph, not a tree</strong>. Choices reference other
-              sections by identifier, so paths can merge, loop back, or dead-end into endings — and structural
-              facts like a story's start, its endings, and any unreachable scenes are <em>computed</em> from how
-              choices connect, never manually tracked. Chapters chain in sequence and keep each graph
-              manageable, so a large story stays navigable instead of becoming one impossible tangle.
+              Elements are the atoms of a scene — text, choices and media all sit at the same level, so the
+              thing a creator drags onto the canvas is the same object the story is built from. Branching is
+              carried by the choice elements themselves, each referencing its destination by identifier.
+            </p>
+
+            <p>
+              Branching is modelled as a <strong>graph, not a tree</strong>: paths can merge, loop back, or
+              end. Endings are <em>authored</em> rather than guessed — a creator marks a scene as an ending and
+              gives it a type, because a death screen offering "return to chapter 2" is still an ending, while
+              a scene someone simply forgot to connect is a mistake, not a conclusion. Everything else is
+              computed from the actual connections: where a story starts, which scenes are unreachable, and
+              which have no way out.
+            </p>
+
+            <p>
+              <strong>Media lives outside the database.</strong> Story structure is stored in MongoDB, while
+              images, audio and video are held in Cloudflare R2 object storage. Documents keep only an object
+              key, resolved to a public URL at the moment a story is read, and uploads go straight from the
+              browser to the bucket. It's a deliberate fit for a read-heavy platform — stories are written once
+              and read many times, and R2 doesn't charge for the traffic leaving it.
+            </p>
+
+            <p>
+              Every write is verified server-side. The backend loads a story by owner as well as by identifier,
+              so one creator can never address another's work, and applies edits through an explicit list of
+              permitted fields rather than trusting whatever the client sends.
             </p>
 
             <div class="stackrow">
               <span class="tech">Nuxt 3</span>
               <span class="tech">Vue 3</span>
-              <span class="tech">Node.js</span>
-              <span class="tech">MongoDB</span>
-              <span class="tech">REST</span>
-              <span class="tech">DigitalOcean</span>
+              <span class="tech">MongoDB / Mongoose</span>
+              <span class="tech">Cloudflare R2</span>
+              <span class="tech">Vue Flow</span>
+              <span class="tech">Vite</span>
             </div>
           </section>
 
@@ -231,26 +296,30 @@
                 <ul class="ticks">
                   <li>Accounts, ownership &amp; project dashboard</li>
                   <li>Browser-based editor with docked panels</li>
-                  <li>Scene canvas with live element editing</li>
-                  <li>Searchable section index with computed badges</li>
+                  <li>Scene canvas with grid snapping &amp; undo/redo</li>
+                  <li>Story-map node graph with drag-to-connect branching</li>
+                  <li>Cross-chapter branching &amp; authored endings</li>
+                  <li>Searchable section index with live status badges</li>
                   <li>Contextual inspector system</li>
+                  <li>Cloudflare R2 storage architecture</li>
                   <li>Full light-theme design system</li>
                 </ul>
               </div>
               <div class="statuscol">
                 <div class="statuscol__h wip">In progress</div>
                 <ul class="ticks ticks--wip">
-                  <li>Story-map node graph (drag-to-connect)</li>
-                  <li>Cross-chapter branching</li>
+                  <li>Media upload wired into the editor</li>
+                  <li>Fully playable choice &amp; animation elements</li>
+                  <li>Full demo — editor and a complete story</li>
                   <li>Chapter management &amp; navigation</li>
-                  <li>Schema for tags, audio &amp; sequencing</li>
+                  <li>Reader playback mode</li>
                 </ul>
               </div>
             </div>
 
             <p class="muted">
-              Current priority: a correct, stable authoring loop — create a story, build scenes, connect
-              choices, preview, publish — before broader feature work.
+              Current priority: closing the loop end to end — create a story, build scenes, connect choices,
+              read it back — so a creator can go from empty project to finished story without gaps.
             </p>
           </section>
 
@@ -270,6 +339,10 @@
                   <div class="tl__title">Early experimentation — "Branching Tales"</div>
                   <p>First attempt at branching stories, with logic tightly coupled to the UI. It proved the
                   idea was interesting but didn't scale past simple stories. Paused, then restarted clean.</p>
+                  <figure class="shotframe">
+                    <img :src="btImg" alt="The Branching Tales landing page — a hero banner reading &quot;Discover Interactive Storytelling&quot;" />
+                    <figcaption>Branching Tales, the 2024 predecessor — the idea was already there; the architecture to support it wasn't.</figcaption>
+                  </figure>
                 </div>
               </li>
               <li class="tl">
@@ -299,12 +372,57 @@
                 </div>
               </li>
               <li class="tl">
-                <div class="tl__when">2026</div>
+                <div class="tl__when">Early 2026</div>
                 <div class="tl__body">
-                  <div class="tl__title">Consolidation, theme &amp; product polish</div>
-                  <p>Backend-first contract formalised; the editor re-themed end-to-end into a coherent light
-                  design system, restructured into a docked game-engine layout, and refined toward a creator-ready
-                  MVP.</p>
+                  <div class="tl__title">Contract, conventions &amp; a docked editor</div>
+                  <p>Backend-first contract formalised. The intended structure of the codebase was written down
+                  first and treated as binding, then the project was reorganised to match it — a stretch of work
+                  with no visible product change, so that later editor work had somewhere stable to land. The
+                  editor was re-themed end to end into a coherent light design system and restructured into a
+                  docked, game-engine layout.</p>
+                </div>
+              </li>
+              <li class="tl">
+                <div class="tl__when">Jun–Jul 2026</div>
+                <div class="tl__body">
+                  <div class="tl__title">The editor becomes real</div>
+                  <p>A fixed portrait scene canvas with grid snapping and bounds clamping, the element type
+                  system, and undo/redo with keyboard shortcuts. Underneath it, one state layer took ownership of
+                  every edit: changes apply instantly, roll back if the server rejects them, and leave in a
+                  strict queue so a fast sequence of actions can't arrive out of order. More machinery than a
+                  direct save would need, in exchange for an editor that stays consistent under messy, rapid
+                  interaction.</p>
+                </div>
+              </li>
+              <li class="tl">
+                <div class="tl__when">Jul 2026</div>
+                <div class="tl__body">
+                  <div class="tl__title">Branching becomes visual</div>
+                  <p>The read-only story graph was replaced with an editable node map — one output handle per
+                  choice, and branches wired by dragging from a choice to its destination instead of typing an
+                  identifier into a field. Endings became something a creator declares and labels rather than
+                  something inferred from missing links. The map stopped being a diagram of the story and became
+                  the place the story is authored.</p>
+                </div>
+              </li>
+              <li class="tl">
+                <div class="tl__when">Jul 2026</div>
+                <div class="tl__body">
+                  <div class="tl__title">Storage architecture decided</div>
+                  <p>Media moved onto Cloudflare R2, splitting structure from bytes: documents hold an object key,
+                  never a file or a URL, and uploads go browser-to-bucket directly. Chosen for the economics of a
+                  read-heavy platform — written once, read many times, with no charge on traffic leaving the
+                  store — and for keeping the storage provider a swappable detail rather than something baked
+                  into every record.</p>
+                </div>
+              </li>
+              <li class="tl">
+                <div class="tl__when">Jul 2026</div>
+                <div class="tl__body">
+                  <div class="tl__title">Consolidation — one codebase, one schema</div>
+                  <p>Two earlier storage systems were retired outright and the data model collapsed to a single
+                  coherent shape, with anything the product had moved past removed rather than left switched off.
+                  The point where the architecture stopped accumulating and started settling.</p>
                 </div>
               </li>
             </ol>
@@ -315,11 +433,12 @@
             <span class="kicker">Roadmap</span>
             <h2 class="h2">What's next</h2>
             <ul class="nextlist">
-              <li><strong>Story-map graph</strong> — drag-to-connect node view for authoring branches visually.</li>
-              <li><strong>Cross-chapter branching</strong> — choices that route between chapters, not just within them.</li>
-              <li><strong>Backend invariants</strong> — server-side validation that prevents broken graphs and invalid references.</li>
+              <li><strong>Media upload pipeline</strong> — wiring direct browser-to-bucket uploads into the editor so creators can bring in their own images, audio and animation.</li>
+              <li><strong>Playable elements</strong> — making choice and animation elements fully functional, not just placeable.</li>
+              <li><strong>The full demo</strong> — the editor and a complete story, built to be read by developers, animators, writers and general readers alike.</li>
               <li><strong>Reader experience</strong> — a dedicated player for consuming stories on web and mobile.</li>
-              <li><strong>Media &amp; audio</strong> — richer scene composition with sound and sequencing.</li>
+              <li><strong>Autosave</strong> — removing the last manual step from the authoring loop.</li>
+              <li><strong>Chapter &amp; project inspectors</strong> — completing the inspector set alongside scenes and elements.</li>
               <li><strong>Creator base</strong> — onboard founding creators and build a starting library of stories.</li>
             </ul>
 
@@ -343,6 +462,7 @@ import Header from '../components/Header.vue';
 import editorImg from '@/assets/documentation_loomverse/editor.png';
 import dashboardImg from '@/assets/documentation_loomverse/dashboard.png';
 import filesImg from '@/assets/documentation_loomverse/files.png';
+import btImg from '@/assets/Images/loomverse/bt.png';
 </script>
 
 <style scoped>
@@ -382,6 +502,13 @@ import filesImg from '@/assets/documentation_loomverse/files.png';
 .lv-page strong { font-weight: 650; color: var(--ink); }
 .lv-page em { font-style: italic; color: var(--ink-2); }
 
+
+.unselect{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 /* ===========================================================
    Hero
    =========================================================== */
